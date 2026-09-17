@@ -25,10 +25,20 @@ Mangosteen Campus/
 │   └── accounts/            # User (custom), EmailVerificationToken, auth API (register/verify/login/refresh/logout/me)
 │       └── management/commands/seed_admin.py   # สร้างบัญชี Admin คนแรกสำหรับ dev (ยังไม่มี UI User Management)
 └── frontend/                # React + Vite + TypeScript + Tailwind v4 (pnpm)
-    └── (จะเพิ่มรายละเอียดตอนสร้าง scaffold)
+    ├── .env.example         # VITE_API_BASE_URL (ตั้งใจใช้ 127.0.0.1 แทน localhost — ดูหมายเหตุด้านล่าง)
+    ├── eslint.config.js     # แทนที่ oxlint (default ของ create-vite) เพราะ CLAUDE.md ระบุให้ CI ใช้ eslint
+    ├── vite.config.ts       # Vite + Tailwind v4 plugin + vitest config
+    └── src/
+        ├── main.tsx         # entry: BrowserRouter > AuthProvider > App, โหลด i18n
+        ├── App.tsx          # route ทั้งหมด (login/register/verify-email/dashboard)
+        ├── lib/              # api.ts (axios + JWT interceptor + auto-refresh), i18n.ts, tokenStorage.ts, errors.ts
+        ├── locales/{th,en}/  # translation JSON แยก namespace (common, auth) — th = default
+        ├── features/auth/    # AuthContext, LoginPage, RegisterPage, VerifyEmailPage, ProtectedRoute
+        └── features/dashboard/DashboardPage.tsx   # placeholder ชั่วคราว รอ wireframe ก่อนทำจริง
 ```
 
 ## หมายเหตุ
 - โครงสร้างนี้จะขยายรายละเอียดขึ้นเรื่อยๆ ตามที่ implement จริงในแต่ละ vertical slice
 - Django apps ใน `backend/` แบ่งตามโดเมนตาม `docs/database.md` §2 — จะเพิ่มเข้ามาทีละแอปตามฟีเจอร์ที่กำลังทำ ไม่สร้างล่วงหน้าทั้งหมด
 - Dev database (Postgres ผ่าน `docker-compose.yml`) เป็นข้อมูลชั่วคราวเสมอ — ไม่ใช่ source of truth ของ schema (source of truth คือ migration files ที่ commit ใน git)
+- Frontend เรียก backend ด้วย `127.0.0.1` ไม่ใช้ `localhost` — บางเครื่อง "localhost" resolve เป็น IPv6 (`::1`) ก่อน ถ้ามีโปรเซสอื่นจับพอร์ตเดียวกันฝั่ง IPv6 ไว้ (เช่นโปรเจกต์อื่นใน Docker) จะหลุดไปเรียกผิดเซิร์ฟเวอร์แบบเงียบๆ

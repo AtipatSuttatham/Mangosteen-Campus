@@ -1,0 +1,20 @@
+{
+  "appName": "Mangosteen Campus",
+  "nav": {
+    "dashboard": "แดชบอร์ด",
+    "logout": "ออกจากระบบ"
+  },
+  "language": {
+    "th": "ไทย",
+    "en": "English"
+  },
+  "role": {
+    "admin": "ผู้ดูแลระบบ",
+    "teacher": "ผู้สอน",
+    "student": "ผู้เรียน"
+  },
+  "action": {
+    "submit": "ยืนยัน",
+    "loading": "กำลังโหลด..."
+  }
+}
