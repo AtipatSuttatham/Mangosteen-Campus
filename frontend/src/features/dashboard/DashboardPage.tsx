@@ -1,26 +1,46 @@
 import { useTranslation } from 'react-i18next'
 
 import { useAuth } from '../auth/AuthContext'
+import { AdminDashboard } from './AdminDashboard'
+import { DashboardLayout, type DashboardNavItem } from './DashboardLayout'
+import { StudentDashboard } from './StudentDashboard'
+import { TeacherDashboard } from './TeacherDashboard'
+import { BookIcon, ClockIcon, GridIcon, MegaphoneIcon, SwapIcon, UsersIcon, WrenchIcon } from '../../components/icons'
 
-// Placeholder ชั่วคราวเพื่อให้ flow login → redirect ทดสอบได้ครบ
-// ดีไซน์จริงของ dashboard shell (แยกตาม role) รอ wireframe ที่ต้องเสนอผู้ใช้ก่อน (ดู plan ขั้นตอนที่ 5)
 export function DashboardPage() {
-  const { t } = useTranslation('common')
-  const { user, logout } = useAuth()
+  const { t } = useTranslation('dashboard')
+  const { user } = useAuth()
+
+  if (!user) return null
+
+  const navItemsByRole: Record<typeof user.role, DashboardNavItem[]> = {
+    admin: [
+      { icon: GridIcon, label: t('nav.dashboard'), active: true },
+      { icon: UsersIcon, label: t('nav.userManagement') },
+      { icon: WrenchIcon, label: t('nav.systemSupport') },
+      { icon: SwapIcon, label: t('nav.impersonation') },
+      { icon: ClockIcon, label: t('nav.auditLog') },
+    ],
+    teacher: [
+      { icon: GridIcon, label: t('nav.dashboard'), active: true },
+      { icon: BookIcon, label: t('nav.myCourses') },
+    ],
+    student: [
+      { icon: GridIcon, label: t('nav.dashboard'), active: true },
+      { icon: BookIcon, label: t('nav.myCourses') },
+      { icon: MegaphoneIcon, label: t('nav.announcements') },
+    ],
+  }
+
+  const content = {
+    admin: <AdminDashboard />,
+    teacher: <TeacherDashboard />,
+    student: <StudentDashboard />,
+  }[user.role]
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
-      <div className="text-center">
-        <p className="text-lg text-gray-800">
-          {user?.first_name} {user?.last_name} — {user && t(`role.${user.role}`)}
-        </p>
-        <button
-          onClick={() => void logout()}
-          className="mt-4 rounded-md bg-gray-800 px-4 py-2 text-white hover:bg-gray-900"
-        >
-          {t('nav.logout')}
-        </button>
-      </div>
-    </div>
+    <DashboardLayout navItems={navItemsByRole[user.role]} subtitle={t(`subtitle.${user.role}`)}>
+      {content}
+    </DashboardLayout>
   )
 }

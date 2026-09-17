@@ -32,9 +32,10 @@ Mangosteen Campus/
         ├── main.tsx         # entry: BrowserRouter > AuthProvider > App, โหลด i18n
         ├── App.tsx          # route ทั้งหมด (login/register/verify-email/dashboard)
         ├── lib/              # api.ts (axios + JWT interceptor + auto-refresh), i18n.ts, tokenStorage.ts, errors.ts
-        ├── locales/{th,en}/  # translation JSON แยก namespace (common, auth) — th = default
+        ├── locales/{th,en}/  # translation JSON แยก namespace (common, auth, dashboard) — th = default
+        ├── components/icons.tsx   # ไอคอนเส้น + CalyxMark (โลโก้กลีบเลี้ยงมังคุด, ดู design system ด้านล่าง)
         ├── features/auth/    # AuthContext, LoginPage, RegisterPage, VerifyEmailPage, ProtectedRoute
-        └── features/dashboard/DashboardPage.tsx   # placeholder ชั่วคราว รอ wireframe ก่อนทำจริง
+        └── features/dashboard/    # DashboardLayout (sidebar+header ร่วม) + Admin/Teacher/StudentDashboard
 ```
 
 ## หมายเหตุ
@@ -42,3 +43,5 @@ Mangosteen Campus/
 - Django apps ใน `backend/` แบ่งตามโดเมนตาม `docs/database.md` §2 — จะเพิ่มเข้ามาทีละแอปตามฟีเจอร์ที่กำลังทำ ไม่สร้างล่วงหน้าทั้งหมด
 - Dev database (Postgres ผ่าน `docker-compose.yml`) เป็นข้อมูลชั่วคราวเสมอ — ไม่ใช่ source of truth ของ schema (source of truth คือ migration files ที่ commit ใน git)
 - Frontend เรียก backend ด้วย `127.0.0.1` ไม่ใช้ `localhost` — บางเครื่อง "localhost" resolve เป็น IPv6 (`::1`) ก่อน ถ้ามีโปรเซสอื่นจับพอร์ตเดียวกันฝั่ง IPv6 ไว้ (เช่นโปรเจกต์อื่นใน Docker) จะหลุดไปเรียกผิดเซิร์ฟเวอร์แบบเงียบๆ
+- Design tokens (สี "Mangosteen Wine" #5E2250 + เขียวเซจ, font Taviraj/IBM Plex Sans Thai) กำหนดไว้ที่ `frontend/src/index.css` ผ่าน Tailwind v4 `@theme` — อนุมัติจาก design review แล้ว (ดู dashboard wireframe artifact)
+- Dashboard ส่วนที่ยังไม่มี backend รองรับ (สถิติ/กิจกรรม/รายวิชา/ประกาศ) แสดงสถานะ "ยังไม่เปิดใช้งาน" ตรงไปตรงมา ไม่ใส่ตัวเลข/ข้อมูลสมมติ — จะเปลี่ยนเป็นข้อมูลจริงทีละส่วนตอน implement ฟีเจอร์ที่เกี่ยวข้อง (Course/Assignment/Announcement/Grading)

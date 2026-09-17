@@ -1,0 +1,43 @@
+{
+  "greeting": "Hello, {{name}}",
+  "nav": {
+    "dashboard": "Dashboard",
+    "userManagement": "User management",
+    "systemSupport": "System support",
+    "impersonation": "Switch view",
+    "auditLog": "Audit log",
+    "myCourses": "My courses",
+    "announcements": "Announcements"
+  },
+  "subtitle": {
+    "admin": "Today's system overview",
+    "teacher": "Your courses and teaching",
+    "student": "Your learning overview"
+  },
+  "figures": {
+    "teachers": "Teachers",
+    "students": "Students",
+    "openCourses": "Open courses",
+    "myCourses": "Courses you teach",
+    "totalStudents": "Total students",
+    "pendingGrading": "Items to grade",
+    "enrolledCourses": "Enrolled courses",
+    "dueThisWeek": "Due this week",
+    "unreadAnnouncements": "Unread announcements"
+  },
+  "sections": {
+    "recentActivity": "Recent activity",
+    "shortcuts": "Shortcuts",
+    "pendingGrading": "Needs grading",
+    "myCourses": "My courses",
+    "upcomingWork": "Coming up",
+    "recentAnnouncements": "Recent announcements"
+  },
+  "comingSoon": {
+    "activity": "No activity yet, because this feature isn't built yet",
+    "courses": "No course data yet, because this feature isn't built yet",
+    "grading": "Nothing to grade yet, because this feature isn't built yet",
+    "work": "Nothing due yet, because this feature isn't built yet",
+    "announcements": "No announcements yet, because this feature isn't built yet"
+  }
+}
