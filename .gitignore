@@ -1,0 +1,30 @@
+# Backend (Python / Django / uv)
+backend/.venv/
+backend/**/__pycache__/
+backend/**/*.pyc
+backend/.env
+backend/staticfiles/
+backend/media/
+backend/db.sqlite3
+backend/.pytest_cache/
+backend/.ruff_cache/
+backend/.coverage
+backend/htmlcov/
+
+# Frontend (Node / Vite)
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/coverage/
+
+# Env files (คงไว้เฉพาะ .env.example)
+.env
+.env.*
+!.env.example
+!*/.env.example
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
