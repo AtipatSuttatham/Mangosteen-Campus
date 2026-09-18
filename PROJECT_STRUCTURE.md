@@ -15,7 +15,8 @@ Mangosteen Campus/
 │   └── database-guide.md    # อธิบาย lifecycle/workflow การใช้งานแต่ละ table แบบครบวงจร
 ├── .github/
 │   └── workflows/
-│       └── backend.yml      # CI: ruff + pytest (Postgres service container) เมื่อ push/PR แตะ backend/**
+│       ├── backend.yml      # CI: ruff + pytest (Postgres service container) เมื่อ push/PR แตะ backend/**
+│       └── frontend.yml     # CI: tsc + eslint + vitest + build เมื่อ push/PR แตะ frontend/**
 ├── backend/                 # Django + DRF project (uv, Python 3.13)
 │   ├── manage.py            # แก้ให้ stdout/stderr เป็น UTF-8 เสมอ (กัน Windows console พังตอนพิมพ์ข้อความไทย)
 │   ├── pyproject.toml       # dependency + config ของ ruff/pytest
